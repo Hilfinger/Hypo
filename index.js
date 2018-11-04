@@ -164,7 +164,7 @@ bot.on("message", async message =>{
         await(rMember.addRole(gRole.id));
 
         try{
-            rMember.sendMessage(`**(!)** Din nye rank er ${gRole.name}`);
+            await rMember.sendMessage(`**(!)** Din nye rank er ${gRole.name}`);
         } catch(e){
         message.channel.send(`${rMember} sin nye rank er ${gRole.name}, prøvde å sende en DM men det funket ikke :(`);
     }
