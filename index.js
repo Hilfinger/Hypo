@@ -6,6 +6,11 @@ bot.on("ready", async () => {
     bot.user.setActivity("Geektopia");
 });
 
+client.on("guildMemberAdd", message => {
+    var role = member.guild.roles.find(`name`, "Medlem");
+    member.addRole(role);
+});
+
 bot.on("message", async message =>{
 
     if(message.author.bot) return;
