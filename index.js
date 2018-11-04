@@ -19,6 +19,17 @@ bot.on("message", async message =>{
     if(cmd === `${prefix}ping`){
         return message.channel.send("pong");
     }
+    
+    if(cmd === `${prefix}botinfo`){
+        let sembed = new discord.RichEmbed()
+        .setDescription("Server Informasjon")
+        .setColor("#4f8ef2")
+        .addField("Server Name", message.guild.name)
+        .addField("Total Members", message.guild.memberCount)
+        .addField("Created On", message.guild.createdAt);
+
+        return message.channel.send(sembed);
+    }
 });
 
 bot.login(process.env.token);
