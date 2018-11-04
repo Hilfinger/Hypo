@@ -30,6 +30,16 @@ bot.on("message", async message =>{
 
         return message.channel.send(sembed);
     }
+    
+    if(cmd === `${prefix}botinfo`){
+        let bembed = new discord.RichEmbed()
+        .setDescription("Server Informasjon")
+        .setColor("#4f8ef2")
+        .addField("Bot Navn", bot.user.username)
+        .addField("Laget Den", message.guild.createdAt);
+
+        return message.channel.send(bembed);
+    }
 });
 
 bot.login(process.env.token);
