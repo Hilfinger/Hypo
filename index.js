@@ -20,13 +20,13 @@ bot.on("message", async message =>{
         return message.channel.send("pong");
     }
     
-    if(cmd === `${prefix}botinfo`){
+    if(cmd === `${prefix}serverinfo`){
         let sembed = new discord.RichEmbed()
         .setDescription("Server Informasjon")
         .setColor("#4f8ef2")
-        .addField("Server Name", message.guild.name)
-        .addField("Total Members", message.guild.memberCount)
-        .addField("Created On", message.guild.createdAt);
+        .addField("Server Navn", message.guild.name)
+        .addField("Totale Medlemmer", message.guild.memberCount)
+        .addField("Laget Den", message.guild.createdAt);
 
         return message.channel.send(sembed);
     }
