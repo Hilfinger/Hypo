@@ -36,7 +36,8 @@ bot.on("message", async message =>{
         .setDescription("Server Informasjon")
         .setColor("#4f8ef2")
         .addField("Bot Navn", bot.user.username)
-        .addField("Laget Den", message.guild.createdAt);
+        .addField("Laget Den", message.guild.createdAt)
+        .addField("Laget Av", "Thwisted");
 
         return message.channel.send(bembed);
     }
