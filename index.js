@@ -150,6 +150,26 @@ bot.on("message", async message =>{
         return message.channel.send(hjelpEmbed);
     }
 
+    if(cmd === `${prefix}addrank`){
+
+        if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.channel.send("**(!)** Du har ikke tilgang til dette");
+        let rMember = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
+        if(!rMember) return message.channel.send("**(!)** Kunne ikke finne den brukeren");
+        let role = args.join(" ").slice(22);
+        if(!role) return message.channel.send("**(!)** Velg en rank");
+        let gRole = message.guild.roles.find(`name`, role);
+        if(!gRole) return message.channel.send("**(!)** Kunne ikke finne den ranken");
+
+        if(rMember.roles.has(gRole.id));
+        await(rMember.addRole(gRole.id));
+
+        try{
+            rMember.sendMessage(`**(!)** Din nye rank er ${gRole.name}`);
+        } catch(e){
+        message.channel.send(`${rMember} sin nye rank er ${gRole.name}, prøvde å sende en DM men det funket ikke :(`);
+    }
+}
+
 
 
 
