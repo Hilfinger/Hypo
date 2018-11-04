@@ -52,7 +52,7 @@ bot.on("message", async message =>{
         if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.channel.send("**(!)** Du har ikke tilgang til denne kommandoen");
         if(!args[0]) return message.channel.send("**(!)** Skriv inn mengden meldinger du vil fjerne");
         message.channel.bulkDelete(args[0]).then(() => {
-            message.channel.send(`Fjernet **${args[0]}** medlinger`).then(msg => msg.delete(5000));
+            return message.channel.send(`Fjernet **${args[0]}** medlinger`).then(msg => msg.delete(5000));
         });
     }
 
