@@ -1,6 +1,5 @@
 const discord = require("discord.js");
 const bot = new discord.Client();
-const client = new discord.Client();
 
 bot.on("ready", async () => {
     console.log(`${bot.user.username} is now online`);
@@ -21,8 +20,11 @@ bot.on("message", async message =>{
         return message.channel.send("pong");
     }
 
-    client.on("guildMemberAdd", message => {
-        var role = member.guild.roles.find(`name`, "Medlem");
+    bot.on('guildMemberAdd', message => {
+        console.log("Bruker ", + member.user.username + " har joinet serveren");
+
+        var role = member.guild.roles.fins('name', 'Medlem');
+
         member.addRole(role);
     });
 
@@ -52,7 +54,7 @@ bot.on("message", async message =>{
         if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.channel.send("**(!)** Du har ikke tilgang til denne kommandoen");
         if(!args[0]) return message.channel.send("**(!)** Skriv inn mengden meldinger du vil fjerne");
         message.channel.bulkDelete(args[0]).then(() => {
-            return message.channel.send(`Fjernet **${args[0]}** meldinger`).then(msg => msg.delete(5000));
+            message.channeld.send(`Fjernet **${args[0]}** medlinger`).then(msg => msg.delete(5000));
         });
     }
 
@@ -102,6 +104,26 @@ bot.on("message", async message =>{
         message.guild.member(bUser).ban(bReason);
 
         bansChannel.send(banEmbed);
+        return;
+    }
+
+    if(cmd === `${prefix}report`){
+        let rUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
+        if(!rUser) return message.channel.send("**(!)** Kunne ikke finne den brukeren");
+        let rReason = args.join(" ").slice(22);
+        
+        let reprotEmbed = new discord.RichEmbed()
+        .setDescription("Report")
+        .setColor("#4f8ef2")
+        .addField("Bruker Rapportert", `${rUser}`)
+        .addField("Rapportert Av", message.author)
+        .addField("Tid", message.createdAt)
+        .addField("Grunn", rReason);
+
+        let reportsChannel = message.guild.channels.find(`name`, "reports");
+        if(!reportsChannel) return message.channel.send("**(!)** Kunne ikke finne reports kanalen");
+
+        reportsChannel.send(reprotEmbed);
         return;
     }
 
